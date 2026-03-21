@@ -49,11 +49,11 @@ class MoodAnalyzer:
 
         Ideas to improve:
           - Remove punctuation
-          - Handle simple emojis separately (":)", ":-(", "🥲", "😂")
+          - Handle simple emojisw separately (":)", ":-(", "🥲", "😂")
           - Normalize repeated characters ("soooo" -> "soo")
         """
         cleaned = text.strip().lower()
-        tokens = cleaned.split()
+        tokens = [word.strip(".,!?;:'\"()") for word in cleaned.split() if word.strip(".,!?;:'\"()")]
 
         return tokens
 
@@ -75,15 +75,24 @@ class MoodAnalyzer:
           - Give some words higher weights than others (for example "hate" < "annoyed")
           - Treat emojis or slang (":)", "lol", "💀") as strong signals
         """
-        # TODO: Implement this method.
-        #   1. Call self.preprocess(text) to get tokens.
-        #   2. Loop over the tokens.
-        #   3. Increase the score for positive words, decrease for negative words.
-        #   4. Return the total score.
-        #
-        # Hint: if you implement negation, you may want to look at pairs of tokens,
-        # like ("not", "happy") or ("never", "fun").
-        pass
+        tokens = self.preprocess(text)
+        score = 0
+        negators = {"not", "never", "no", "don't", "doesn't", "didn't", "isn't", "wasn't"}
+
+        i = 0
+        while i < len(tokens):
+            token = tokens[i]
+            # Check if the previous token was a negator
+            negated = i > 0 and tokens[i - 1] in negators
+
+            if token in self.positive_words:
+                score += -1 if negated else 1
+            elif token in self.negative_words:
+                score += 1 if negated else -1
+
+            i += 1
+
+        return score
 
     # ---------------------------------------------------------------------
     # Label prediction
@@ -105,12 +114,14 @@ class MoodAnalyzer:
         Just remember that whatever labels you return should match the labels
         you use in TRUE_LABELS in dataset.py if you care about accuracy.
         """
-        # TODO: Implement this method.
-        #   1. Call self.score_text(text) to get the numeric score.
-        #   2. Return "positive" if the score is above 0.
-        #   3. Return "negative" if the score is below 0.
-        #   4. Return "neutral" otherwise.
-        pass
+        score = self.score_text(text)
+
+        if score > 0:
+            return "positive"
+        elif score < 0:
+            return "negative"
+        else:
+            return "neutral"
 
     # ---------------------------------------------------------------------
     # Explanations (optional but recommended)

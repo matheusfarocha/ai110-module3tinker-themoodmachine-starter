@@ -23,6 +23,17 @@ POSITIVE_WORDS = [
     "chill",
     "relaxed",
     "amazing",
+    # slang / colloquial positives
+    "sick",
+    "fire",
+    "wicked",
+    "lit",
+    "dope",
+    "proud",
+    "obsessed",
+    "hyped",
+    "stoked",
+    "blessed",
 ]
 
 NEGATIVE_WORDS = [
@@ -36,6 +47,17 @@ NEGATIVE_WORDS = [
     "stressed",
     "hate",
     "boring",
+    # colloquial negatives
+    "rough",
+    "exhausted",
+    "miserable",
+    "annoyed",
+    "frustrated",
+    "jealous",
+    "drained",
+    "overwhelmed",
+    "gutted",
+    "ugh",
 ]
 
 # ---------------------------------------------------------------------
@@ -50,6 +72,17 @@ SAMPLE_POSTS = [
     "This is fine",
     "So excited for the weekend",
     "I am not happy about this",
+    # --- added posts ---
+    "lowkey obsessed with this song rn 🎵",                          # slang + emoji, clear positive
+    "I absolutely love sitting in traffic for 2 hours 🙃",           # sarcasm → actually negative
+    "ngl I'm stressed af but at least it's Friday 😅",               # mixed: negative + positive
+    "💀💀💀 bro really said that out loud",                          # emoji-heavy, amused/neutral reaction
+    "been a rough week not gonna lie",                               # understated negative, no strong keywords
+    "vibes are immaculate today no cap 🔥",                          # slang, clearly positive
+    "I dunno, kinda meh about the whole thing",                      # ambiguous/neutral
+    "so proud of my friend but also lowkey jealous 😬",              # mixed emotions
+    "this homework is literally destroying me but I got it done 💪",  # mixed: negative process, positive outcome
+    "ok not bad I guess",                                            # subtle positive with hedging
 ]
 
 # Human labels for each post above.
@@ -65,6 +98,17 @@ TRUE_LABELS = [
     "neutral",   # "This is fine"
     "positive",  # "So excited for the weekend"
     "negative",  # "I am not happy about this"
+    # --- added labels ---
+    "positive",  # lowkey obsessed with this song rn 🎵
+    "negative",  # sarcastic love of traffic
+    "mixed",     # stressed but it's Friday
+    "neutral",   # 💀💀💀 amused reaction, no clear valence
+    "negative",  # been a rough week
+    "positive",  # vibes are immaculate today no cap 🔥
+    "neutral",   # kinda meh about the whole thing
+    "mixed",     # proud but lowkey jealous
+    "mixed",     # homework destroying me but got it done
+    "positive",  # ok not bad I guess
 ]
 
 # TODO: Add 5-10 more posts and labels.
